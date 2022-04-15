@@ -112,11 +112,11 @@ $(document).ready(function(){
         var pesquisa = $('#findNome').val();  
 
         var tr = linhas.find('tr');
-        for(var i =1; i <= tr.length; i++){
+        for(var i =0; i <= tr.length; i++){
             var td = linhas.find('tr#'+i+' > .nome').text();
             var trEspecifica = linhas.find('tr#'+i);
             //tr.find('tr#'+i);
-            if(td == pesquisa){
+            if(td === pesquisa){
                 console.log("legal");
             } else{
                 trEspecifica.hide();            
