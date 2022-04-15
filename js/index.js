@@ -3,7 +3,7 @@ $(document).ready(function(){
     //SEU CÓDIGO AQUI
     var codigo = 0;
     var documento = $(document);
-    // Funcionalidade 1
+
     $("#addTelefone").blur(function(){
         
         var checandoTel = checarTelefone($("#addTelefone").val());
@@ -15,8 +15,8 @@ $(document).ready(function(){
             $('#addTelefone').removeClass("red");
         }
     });
-    $('#btn-add').on('click', function(){
-        $('.tabs').tabs('select','sec-atualizar');
+
+    $('#btn-add').on('click', function(){        
         codigo++;
         let nome = $('#addNome').val();
         let telefone = $("#addTelefone").val();
@@ -40,15 +40,13 @@ $(document).ready(function(){
         linha.append(Coleditar);
         linha.append(Colexcluir);
         
-
-        //linha.append(acoes);
-  
         linhas.append(linha);
     });            
 
 
-    // Funcionalidade 2 parte 1    
     documento.on('click','.edit', function(){
+        $('.tabs').tabs('select','up');
+
         $('#upNome').empty();
         $('#upTelefone').empty();
        
@@ -64,7 +62,6 @@ $(document).ready(function(){
         $('#upTelefone').val(telefone);
 
     });
-    //documento.on('click','#btn-up', function(){
     $('#btn-up').on('click', function(){
        
         let linhas = $('#lista');
@@ -100,13 +97,40 @@ $(document).ready(function(){
         linhaEditada.append(Coleditar);
         linhaEditada.append(Colexcluir);
         
-
-        //linha.append(acoes);
-        
-
-
         linhas.append(linhaEditada);
 
     });
-   
+    documento.on('click','.excluir', function(){
+        let self = $(this);
+        let linha = self.closest("tr");
+        linha.remove();
+        return false;
+    });
+    documento.on('click','#btn-find', function(){
+       
+        let linhas = $('#lista');
+        var pesquisa = $('#findNome').val();  
+
+        var tr = linhas.find('tr');
+        for(var i =1; i <= tr.length; i++){
+            var td = linhas.find('tr#'+i+' > .nome').text();
+            var trEspecifica = linhas.find('tr#'+i);
+            //tr.find('tr#'+i);
+            if(td == pesquisa){
+                console.log("legal");
+            } else{
+                trEspecifica.hide();            
+            }
+        }
+        
+    });
+    documento.on('click','#btn-show-all', function(){
+       
+        let linhas = $('#lista');
+        var pesquisa = $('#findNome').val();  
+
+        var tr = linhas.find('tr');
+        tr.show()
+      
+    });
 });
